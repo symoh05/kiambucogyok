@@ -105,7 +105,6 @@ export default function RegisterSuccessPage() {
               </div>
             </div>
 
-            {/* Only Register Another button - Go to Dashboard removed */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
               <Link href="/register">
                 <button className="border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-lg font-['Orbitron'] text-sm tracking-wider transition-all flex items-center gap-2 w-full sm:w-auto justify-center">

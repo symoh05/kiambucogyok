@@ -1,22 +1,17 @@
 // app/register/success/page.tsx
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { createClient } from '@supabase/supabase-js'
-
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-)
+import { supabase } from '@/lib/supabase'
 
 export default function RegisterSuccessPage() {
   const [userName, setUserName] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Get the most recently registered member
     const fetchLatestMember = async () => {
       try {
         const { data, error } = await supabase
@@ -51,7 +46,6 @@ export default function RegisterSuccessPage() {
 
         <section className="relative py-16 md:py-24 pt-32 sm:pt-28 lg:pt-32">
           <div className="relative z-10 text-center">
-            {/* Success Icon */}
             <div className="flex justify-center mb-6">
               <div className="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center border border-white/20">
                 <i className="fas fa-check-circle text-white text-5xl"></i>
@@ -79,7 +73,6 @@ export default function RegisterSuccessPage() {
 
             <div className="w-16 h-0.5 bg-white/30 mx-auto mt-4 mb-6"></div>
 
-            {/* Next Steps */}
             <div className="max-w-2xl mx-auto text-left">
               <h3 className="font-['Orbitron'] text-sm text-gray-400 uppercase tracking-wider mb-4">
                 <i className="fas fa-list-check mr-2 text-white"></i> What's Next?
@@ -112,13 +105,8 @@ export default function RegisterSuccessPage() {
               </div>
             </div>
 
-            {/* Action Buttons */}
+            {/* Only Register Another button - Go to Dashboard removed */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Link href="/dashboard">
-                <button className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-lg font-['Orbitron'] text-sm tracking-wider transition-all shadow-sm hover:shadow-md flex items-center gap-2 w-full sm:w-auto justify-center">
-                  <i className="fas fa-th-large"></i> Go to Dashboard
-                </button>
-              </Link>
               <Link href="/register">
                 <button className="border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-lg font-['Orbitron'] text-sm tracking-wider transition-all flex items-center gap-2 w-full sm:w-auto justify-center">
                   <i className="fas fa-user-plus"></i> Register Another
@@ -126,7 +114,6 @@ export default function RegisterSuccessPage() {
               </Link>
             </div>
 
-            {/* Share Button */}
             <div className="mt-6">
               <button
                 onClick={() => {

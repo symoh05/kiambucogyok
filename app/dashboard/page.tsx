@@ -1,15 +1,11 @@
 // app/dashboard/page.tsx
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { createClient } from '@supabase/supabase-js'
-
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-)
+import { supabase } from '@/lib/supabase'
 
 type Member = {
   id: number
@@ -108,7 +104,6 @@ export default function DashboardPage() {
   }
 
   const openMemberModal = (member: Member) => {
-    // Only allow viewing details of the current user, not blurred members
     if (currentMember && member.id === currentMember.id) {
       setSelectedMember(member)
       setIsModalOpen(true)
@@ -196,7 +191,6 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-black">
       <div className="max-w-md mx-auto px-4 py-4">
 
-        {/* User Profile - Top (no border, only bottom line) */}
         {loading ? (
           <div className="pb-4 mb-4 border-b border-white/10 animate-pulse">
             <div className="flex items-center gap-4">
@@ -250,7 +244,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Community Members */}
         <div className="bg-white/5 rounded-2xl border border-white/10 p-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-['Orbitron'] text-xs text-white tracking-wider">
@@ -311,16 +304,17 @@ export default function DashboardPage() {
               })}
               {members.length > 8 && (
                 <div className="text-center pt-2">
-                  <button className="text-xs text-gray-500 hover:text-white transition-colors">
-                    View all {members.length} members <i className="fas fa-arrow-right ml-1 text-[10px]"></i>
-                  </button>
+                  <Link href="/admin/members">
+                    <button className="text-xs text-gray-500 hover:text-white transition-colors">
+                      View all {members.length} members <i className="fas fa-arrow-right ml-1 text-[10px]"></i>
+                    </button>
+                  </Link>
                 </div>
               )}
             </div>
           )}
         </div>
 
-        {/* Register Button */}
         <div className="mt-4">
           <Link href="/register">
             <button className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium flex items-center justify-center gap-2 border border-white/10">
@@ -329,7 +323,6 @@ export default function DashboardPage() {
           </Link>
         </div>
 
-        {/* Member Detail Modal - Only for current user */}
         {isModalOpen && selectedMember && currentMember && selectedMember.id === currentMember.id && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
@@ -412,7 +405,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Edit Profile Modal - Black background */}
         {isEditModalOpen && currentMember && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
@@ -546,7 +538,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Footer */}
         <div className="mt-6 pt-3 border-t border-white/10 text-center text-[10px] pb-6 text-gray-500">
           <i className="fas fa-shield-haltered text-white/30 mr-1"></i>
           Kiambu COGYOK — Your data is private

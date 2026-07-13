@@ -4,14 +4,20 @@ import { createClient } from '@supabase/supabase-js'
 let supabaseInstance: ReturnType<typeof createClient> | null = null
 
 export function getSupabase() {
+  if (typeof window === 'undefined') {
+    // During server-side rendering (including build), return a dummy client
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co',
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'dummy-key'
+    )
+  }
+
   if (!supabaseInstance) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
-    // Provide fallback for build time
     if (!supabaseUrl || !supabaseKey) {
-      // Return a dummy client during build
-      return createClient('https://dummy.supabase.co', 'dummy-key')
+      throw new Error('Missing Supabase environment variables')
     }
 
     supabaseInstance = createClient(supabaseUrl, supabaseKey, {

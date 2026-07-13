@@ -2,6 +2,7 @@
 'use client'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
@@ -29,6 +30,8 @@ const statusOptions = [
 ]
 
 export default function AdminMembersPage() {
+  // ... rest of your code (keep everything the same)
+
   const [members, setMembers] = useState<Member[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')

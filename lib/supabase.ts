@@ -1,14 +1,14 @@
 // lib/supabase.ts
 import { createClient } from '@supabase/supabase-js'
 
-// Only create the client when we're in a browser
+// Check if we're in a browser (not during build)
 const isBrowser = typeof window !== 'undefined'
 
-// Safe fallback for build time
+// For build time, use dummy values
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'dummy-key'
 
-// Create client with fallback values during build
+// Create the client
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     persistSession: isBrowser,
@@ -16,4 +16,4 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
   }
 })
 
-console.log('✅ Supabase client initialized:', isBrowser ? 'Browser' : 'Build time')
+console.log('✅ Supabase client initialized')

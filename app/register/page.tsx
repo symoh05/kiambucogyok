@@ -2,10 +2,13 @@
 'use client'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+
+// ... rest of your code
 
 type FormData = {
   fullName: string

@@ -2,10 +2,13 @@
 'use client'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
+
+// ... rest of your code
 
 export default function RegisterSuccessPage() {
   const [userName, setUserName] = useState('')

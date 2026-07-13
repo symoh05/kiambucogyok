@@ -6,13 +6,6 @@ const nextConfig: NextConfig = {
   
   // Force all pages to be dynamically rendered
   output: 'standalone',
-  
-  // Disable static generation
-  experimental: {
-    turbo: {
-      // Optional
-    }
-  }
 }
 
 export default nextConfig

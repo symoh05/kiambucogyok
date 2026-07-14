@@ -94,6 +94,13 @@ export default function RegisterPage() {
         agreed: true
       }
 
+      // Check if supabase is initialized
+      if (!supabase) {
+        setError('Supabase client not initialized. Please try again.')
+        setIsSubmitting(false)
+        return
+      }
+
       const { data, error: supabaseError } = await supabase
         .from('members')
         .insert([insertData])

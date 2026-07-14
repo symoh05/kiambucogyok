@@ -15,35 +15,15 @@
 
 @layer base {
   body {
-    background-color: #ffffff;
+    background-color: #000000;
     font-family: 'Ubuntu', sans-serif;
-    color: #012156;
+    color: #e6e6e9;
     overflow-x: hidden;
   }
 
-  /* Headings use Orbitron */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Orbitron', monospace !important;
   }
-}
-
-/* PURE BLACK BACKGROUND - for dark theme pages */
-.cyber-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  background: #000000;
-}
-
-.cyber-bg::before {
-  display: none;
-}
-
-.grid-overlay {
-  display: none;
 }
 
 /* Clean scrollbar */
@@ -53,21 +33,21 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #1a1a24;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888888;
+  background: #4a4a5a;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #012156;
+  background: #6a6a7a;
 }
 
 ::selection {
   background: rgba(90, 190, 113, 0.3);
-  color: #012156;
+  color: #ffffff;
 }
 
 * {
@@ -85,48 +65,18 @@
   }
 }
 
-/* ===== HERO CARD STACK ANIMATIONS ===== */
-@keyframes rotateBorder {
-  0%   { transform: rotate(60deg); }
-  67%  { transform: rotate(60deg); }
-  80%  { transform: rotate(40deg); }
-  90%  { transform: rotate(40deg); }
-  100% { transform: rotate(60deg); }
-}
-
-@keyframes rotateBg {
-  0%   { transform: rotate(25deg); }
-  67%  { transform: rotate(25deg); }
-  80%  { transform: rotate(40deg); }
-  90%  { transform: rotate(40deg); }
-  100% { transform: rotate(25deg); }
-}
-
-.border-3 {
-  border-width: 3px;
-}
-
-/* Orbitron font utility class - for accent elements */
 .font-orbitron {
   font-family: 'Orbitron', monospace !important;
 }
 
-/* Ubuntu font utility class - for body text override if needed */
 .font-ubuntu {
   font-family: 'Ubuntu', sans-serif !important;
 }
 
-/* Ensure all body text uses Ubuntu */
 p, span, div, li, a:not(.font-orbitron), label, input, textarea, select, button:not(.font-orbitron) {
   font-family: 'Ubuntu', sans-serif;
 }
 
-/* Ensure headings use Orbitron */
 h1, h2, h3, h4, h5, h6, .heading {
-  font-family: 'Orbitron', monospace !important;
-}
-
-/* Badge, tags, and accent text use Orbitron */
-.badge, .tag, .accent-text {
   font-family: 'Orbitron', monospace !important;
 }

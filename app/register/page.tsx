@@ -5,8 +5,6 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 
-// ... rest of your code (NO dynamic exports)
-
 type FormData = {
   fullName: string
   nickname: string
@@ -85,8 +83,9 @@ export default function RegisterPage() {
     }
 
     try {
-      if (!supabase) {
-        setError('Supabase client not initialized. Please try again.')
+      // ✅ Check if supabase is available in the browser
+      if (typeof window === 'undefined' || !supabase) {
+        setError('Please refresh the page and try again.')
         setIsSubmitting(false)
         return
       }

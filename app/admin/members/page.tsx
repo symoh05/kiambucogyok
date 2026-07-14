@@ -54,9 +54,9 @@ export default function AdminMembersPage() {
     setError('')
 
     try {
-      // Check if supabase is initialized
-      if (!supabase) {
-        setError('Supabase client not initialized. Please try again.')
+      // ✅ Check if we're in the browser and supabase is available
+      if (typeof window === 'undefined' || !supabase) {
+        setError('Please refresh the page and try again.')
         setLoading(false)
         return
       }

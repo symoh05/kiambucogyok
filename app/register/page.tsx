@@ -1,6 +1,9 @@
 // app/register/page.tsx
 'use client'
 
+// Force dynamic rendering instead of static
+export const dynamic = 'force-dynamic'
+
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
@@ -83,6 +86,12 @@ export default function RegisterPage() {
     }
 
     try {
+      if (!supabase) {
+        setError('Supabase client not initialized. Please try again.')
+        setIsSubmitting(false)
+        return
+      }
+
       const insertData = {
         full_name: fullName,
         nickname: formData.nickname || null,
@@ -92,13 +101,6 @@ export default function RegisterPage() {
         status: status,
         notes: formData.notes || null,
         agreed: true
-      }
-
-      // Check if supabase is initialized
-      if (!supabase) {
-        setError('Supabase client not initialized. Please try again.')
-        setIsSubmitting(false)
-        return
       }
 
       const { data, error: supabaseError } = await supabase
@@ -157,7 +159,6 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative z-10">
 
-        {/* Hero Section with Watermark */}
         <section className="relative py-12 md:py-16 pt-32 sm:pt-28 lg:pt-32">
           <div
             className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
@@ -189,7 +190,6 @@ export default function RegisterPage() {
           </div>
         </section>
 
-        {/* Form */}
         <section className="py-6">
           <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 p-6 md:p-8">
             {error && (
@@ -276,7 +276,6 @@ export default function RegisterPage() {
                 />
               </div>
 
-              {/* Custom Status Dropdown */}
               <div>
                 <label className="block text-gray-400 text-xs font-['Orbitron'] mb-1">
                   <i className="fas fa-flag mr-2 text-white"></i>YOUR STATUS <span className="text-red-400">*</span>
@@ -364,7 +363,6 @@ export default function RegisterPage() {
           </div>
         </section>
 
-        {/* FAQ Section - Bottom with Dropdown */}
         <div className="mt-10 pb-16">
           <h3 className="font-['Orbitron'] text-sm text-gray-400 uppercase tracking-wider text-center mb-6">
             <i className="fas fa-circle-question mr-2 text-white"></i> FREQUENTLY ASKED QUESTIONS
@@ -389,7 +387,6 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        {/* Footer */}
         <div className="text-center pb-8 text-xs text-gray-500">
           <i className="fas fa-lock mr-1"></i> Your data is secure and confidential.
         </div>

@@ -1,12 +1,11 @@
 // app/register/page.tsx
 'use client'
 
-// Force dynamic rendering instead of static
-export const dynamic = 'force-dynamic'
-
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+
+// ... rest of your code (NO dynamic exports)
 
 type FormData = {
   fullName: string

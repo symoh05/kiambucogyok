@@ -1,19 +1,12 @@
 // lib/supabase.ts
 import { createClient } from '@supabase/supabase-js'
 
-// Only create the client in the browser
-const isBrowser = typeof window !== 'undefined'
+// This will only work on the client side
+export const supabase = typeof window !== 'undefined'
+  ? createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+    )
+  : null
 
-// Dummy values for build time
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co'
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'dummy-key'
-
-// Create client with proper auth only in browser
-export const supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: {
-    persistSession: isBrowser,
-    autoRefreshToken: isBrowser,
-  }
-})
-
-console.log('✅ Supabase client initialized:', isBrowser ? 'Browser' : 'Server (dummy)')
+console.log('✅ Supabase initialized:', typeof window !== 'undefined')

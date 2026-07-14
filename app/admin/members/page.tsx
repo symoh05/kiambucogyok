@@ -1,9 +1,6 @@
 // app/admin/members/page.tsx
 'use client'
 
-// Force dynamic rendering instead of static
-export const dynamic = 'force-dynamic'
-
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 

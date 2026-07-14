@@ -1,14 +1,9 @@
 // app/register/success/page.tsx
 'use client'
 
-export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-
-// ... rest of your code
 
 export default function RegisterSuccessPage() {
   const [userName, setUserName] = useState('')
@@ -17,6 +12,14 @@ export default function RegisterSuccessPage() {
   useEffect(() => {
     const fetchLatestMember = async () => {
       try {
+        // Check if supabase is initialized
+        if (!supabase) {
+          console.error('Supabase client not initialized')
+          setUserName('Team Kiambu COGYOK')
+          setLoading(false)
+          return
+        }
+
         const { data, error } = await supabase
           .from('members')
           .select('full_name, nickname')

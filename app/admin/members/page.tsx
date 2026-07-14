@@ -1,9 +1,6 @@
 // app/admin/members/page.tsx
 'use client'
 
-export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
-
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 
@@ -30,8 +27,6 @@ const statusOptions = [
 ]
 
 export default function AdminMembersPage() {
-  // ... rest of your code (keep everything the same)
-
   const [members, setMembers] = useState<Member[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -59,6 +54,13 @@ export default function AdminMembersPage() {
     setError('')
 
     try {
+      // Check if supabase is initialized
+      if (!supabase) {
+        setError('Supabase client not initialized. Please try again.')
+        setLoading(false)
+        return
+      }
+
       const { data, error: supabaseError } = await supabase
         .from('members')
         .select('*')

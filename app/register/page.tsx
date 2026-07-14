@@ -3,7 +3,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/utils/supabase/client'
 
 type FormData = {
   fullName: string
@@ -83,8 +83,8 @@ export default function RegisterPage() {
     }
 
     try {
-      // ✅ Check if supabase is available in the browser
-      if (typeof window === 'undefined' || !supabase) {
+      // Check if supabase is available
+      if (!supabase) {
         setError('Please refresh the page and try again.')
         setIsSubmitting(false)
         return

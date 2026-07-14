@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/utils/supabase/client'
 
 type Member = {
   id: number
@@ -54,8 +54,8 @@ export default function AdminMembersPage() {
     setError('')
 
     try {
-      // ✅ Check if we're in the browser and supabase is available
-      if (typeof window === 'undefined' || !supabase) {
+      // Check if supabase is available
+      if (!supabase) {
         setError('Please refresh the page and try again.')
         setLoading(false)
         return

@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/utils/supabase/client'
 
 export default function RegisterSuccessPage() {
   const [userName, setUserName] = useState('')
@@ -12,8 +12,8 @@ export default function RegisterSuccessPage() {
   useEffect(() => {
     const fetchLatestMember = async () => {
       try {
-        // ✅ Check if we're in the browser and supabase is available
-        if (typeof window === 'undefined' || !supabase) {
+        // Check if supabase is available
+        if (!supabase) {
           console.error('Supabase client not available')
           setUserName('Team Kiambu COGYOK')
           setLoading(false)
